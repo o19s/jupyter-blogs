@@ -17,6 +17,10 @@ def copyPost(blogHome, blogText, mdPath):
         destBlog.write(blogText)
 
 
+def ipynbHint(ipynbPath):
+    return "\n\n<small>This blog post was created with Jupyter Notebook: <a href=\"https://github.com/o19s/jupyter-blogs/blob/master/" + ipynbPath + "\">View the source!</a></small>"
+
+
 if __name__ == "__main__":
     args = parseArgs()
     ipynbPath = args.ipynb[0]
@@ -27,4 +31,5 @@ if __name__ == "__main__":
     blogText = open(mdPath).read()
     blogHome = os.path.realpath(args.bloghome[0])
     updatedBlogText = moveImages(blogText, blogHome)
+    updatedBlogText += ipynbHint(ipynbPath)
     copyPost(blogHome, updatedBlogText, mdPath)
