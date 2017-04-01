@@ -11,11 +11,11 @@ def moveImages(blogText, blogHome):
     allImgs = re.findall(imgMdRegex, blogText)
     for img in allImgs:
         pathMatch = img[1]
-        import pdb; pdb.set_trace()
         copyPath = os.path.join(blogHome, blogImgDir)
         shutil.copy(pathMatch, copyPath)
 
-    print(re.sub(imgMdRegex, '![\\1](/' + blogImgDir + '\\2)', blogText))
+    blogText = re.sub(imgMdRegex, '![\\1](/' + blogImgDir + '\\2)', blogText)
+    return blogText
 
 
 def parseArgs():
